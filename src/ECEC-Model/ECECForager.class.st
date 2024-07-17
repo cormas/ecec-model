@@ -1,45 +1,46 @@
 Class {
-	#name : #ECECForager,
-	#superclass : #CMAgent,
+	#name : 'ECECForager',
+	#superclass : 'CMAgent',
 	#traits : 'TCMLocated',
 	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'energy'
 	],
-	#category : #'ECEC-Model'
+	#category : 'ECEC-Model',
+	#package : 'ECEC-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECForager class >> catabolicRate [
 
 	^ 2
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 ECECForager class >> defaultProbes [
 
 	^ self probes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECForager class >> fertilityThreshold [
 
 	^ 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECForager class >> harvestRate [
 
 	self subclassResponsibility
 ]
 
-{ #category : #biology }
+{ #category : 'biology' }
 ECECForager >> consumeEnergy [
 
 	self energy: self energy - self class catabolicRate
 ]
 
-{ #category : #biology }
+{ #category : 'biology' }
 ECECForager >> eat [
 	"The forager eats a quatity of biomass of its current location. The quantity depends on the harvestRate: a proportion of biomass (50% or 99% according to forager type)"
 	
@@ -52,26 +53,26 @@ ECECForager >> eat [
 	self patch biomass: self patch biomass - quantity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECForager >> energy [
 
 	^ energy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECForager >> energy: anObject [
 
 	energy := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ECECForager >> initialize [
 
 	super initialize.
 	energy := 50.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ECECForager >> interestingDetails [
 	"Answer a Collection>of interesting receiver's attributes, from a modeler point of view, to display in a popup for example "
 
@@ -80,7 +81,7 @@ ECECForager >> interestingDetails [
 		}
 ]
 
-{ #category : #biology }
+{ #category : 'biology' }
 ECECForager >> move [
 	"The Forager examines its current location and around. From thw patches that are not occupied, it chooses the one containing the most biomass. If the chosen patch has enough biomass to meet the catabolic rate, the Forager moves there. If not, it moves instead to a randomly chosen adjacent free place (not occupied by another Forager)"	
 
@@ -100,13 +101,14 @@ ECECForager >> move [
 	self moveTo: targetPatch.
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECForager >> pov [
 
+	<pov>
 	self subclassResponsibility
 ]
 
-{ #category : #biology }
+{ #category : 'biology' }
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
 	
@@ -122,13 +124,13 @@ ECECForager >> reproduce [
 	newForager moveTo: freePatch
 ]
 
-{ #category : #povSize }
+{ #category : 'povSize' }
 ECECForager >> sizeOfPOV [
 
 	^ 2 + (self energy / self class fertilityThreshold * 20)
 ]
 
-{ #category : #stepping }
+{ #category : 'stepping' }
 ECECForager >> step [
 
 	self

@@ -1,30 +1,33 @@
 Class {
-	#name : #ECECRestrainedForager,
-	#superclass : #ECECForager,
-	#category : #'ECEC-Model'
+	#name : 'ECECRestrainedForager',
+	#superclass : 'ECECForager',
+	#category : 'ECEC-Model',
+	#package : 'ECEC-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECRestrainedForager class >> entityName [
 
 	^ 'RestrainedForager'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECRestrainedForager class >> harvestRate [
 
 	^ 0.5
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECRestrainedForager >> pov [
 
+	<pov>
 	^ Color blue
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECRestrainedForager >> povEnergy [
 
+	<pov>
 	^ self
 		  povAttribute: #energy
 		  min: 0

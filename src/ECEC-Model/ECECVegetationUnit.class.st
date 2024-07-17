@@ -1,31 +1,32 @@
 Class {
-	#name : #ECECVegetationUnit,
-	#superclass : #CMSpatialEntityElement,
+	#name : 'ECECVegetationUnit',
+	#superclass : 'CMSpatialEntityElement',
 	#instVars : [
 		'biomass'
 	],
-	#category : #'ECEC-Model'
+	#category : 'ECEC-Model',
+	#package : 'ECEC-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECVegetationUnit class >> entityName [
 
 	^ 'VegetationUnit'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECVegetationUnit class >> k [
 
 	^ 10 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECVegetationUnit class >> r [
 
 	^ 0.2 
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ECECVegetationUnit >> asString [
 	" Private - See superimplementor's comment "
 
@@ -37,32 +38,32 @@ ECECVegetationUnit >> asString [
  				<< (biomass truncateTo: 0.005) asString ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECVegetationUnit >> biomass [
 
 	^ biomass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECVegetationUnit >> biomass: anObject [
 
 	biomass := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ECECVegetationUnit >> initialize [ 
 
 	super initialize.
 	biomass := 0.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ECECVegetationUnit >> initializeWithRandomBiomass [
 
 	self biomass: Cormas random
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ECECVegetationUnit >> interestingDetails [
 	"Answer a <Collection> of interesting receiver's attributes, from a modeler point of view, to display in a popup for example"
 
@@ -71,15 +72,16 @@ ECECVegetationUnit >> interestingDetails [
 		}
 ]
 
-{ #category : #growth }
+{ #category : 'growth' }
 ECECVegetationUnit >> logisticGrowth [
 
 	self biomass: (Cormas logisticGrowth: self biomass r: self class r K: self class k)
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECVegetationUnit >> povBiomass [
 
+	<pov>
 	^ self
 		povAttribute: #biomass
 		min: 0
@@ -87,17 +89,19 @@ ECECVegetationUnit >> povBiomass [
 		color: Color green
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECVegetationUnit >> povBiomassForager [
 	
+	<pov>
 	^ self biomass < ECECForager catabolicRate
 		ifTrue: [ Color white ]
 		ifFalse: [ self povBiomass ]
 ]
 
-{ #category : #pov }
+{ #category : 'pov' }
 ECECVegetationUnit >> povForagersVision [
 
+	<pov>
 	(self hasOccupantsOfClass: ECECForager)
 		ifTrue: [ ^ self povBiomassForager ].
 	
@@ -107,7 +111,7 @@ ECECVegetationUnit >> povForagersVision [
 	^ Color black
 ]
 
-{ #category : #stepping }
+{ #category : 'stepping' }
 ECECVegetationUnit >> step [
 	
 	self logisticGrowth

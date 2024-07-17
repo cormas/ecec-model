@@ -1,1 +1,1 @@
-Package { #name : #'ECEC-Model' }
+Package { #name : 'ECEC-Model' }

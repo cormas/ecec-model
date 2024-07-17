@@ -1,48 +1,49 @@
 Class {
-	#name : #ECECModel,
-	#superclass : #CMAbstractModel,
+	#name : 'ECECModel',
+	#superclass : 'CMAbstractModel',
 	#instVars : [
 		'theRestrainedForagers',
 		'theUnrestrainedForagers',
 		'theVegetationUnits'
 	],
-	#category : #'ECEC-Model'
+	#category : 'ECEC-Model',
+	#package : 'ECEC-Model'
 }
 
-{ #category : #'- probes' }
+{ #category : '- probes' }
 ECECModel class >> colorOfProbe_numberOfRestrainedForagers [
   ^ (Color r: 0.05278592375366569 g: 0.0 b: 1.0 alpha: 1.0)
 ]
 
-{ #category : #'- probes' }
+{ #category : '- probes' }
 ECECModel class >> colorOfProbe_numberOfUnrestrainedForagers [
   ^ (Color r: 1.0 g: 0.0 b: 0.0019550342130987292 alpha: 1.0)
 ]
 
-{ #category : #'- probes' }
+{ #category : '- probes' }
 ECECModel class >> colorOfProbe_totalAmountOfBiomass [
   ^ (Color r: 0.21700879765395895 g: 1.0 b: 0.0 alpha: 1.0)
 ]
 
-{ #category : #'simulation settings' }
+{ #category : 'simulation settings' }
 ECECModel class >> defaultInit [
 
 	^ #homogeneousEnvironment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel class >> initialNumberOfRestrainedForagers [
 
 	^ 10
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel class >> initialNumberOfUnrestrainedForagers [
 
 	^ 10
 ]
 
-{ #category : #init }
+{ #category : 'init' }
 ECECModel >> homogeneousEnvironment [
 
 	self
@@ -59,7 +60,7 @@ ECECModel >> homogeneousEnvironment [
 		displayPov: #defaultPOV of: ECECForager
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ECECModel >> initialize [
 
 	super initialize.
@@ -69,7 +70,7 @@ ECECModel >> initialize [
 	theVegetationUnits := OrderedCollection new.
 ]
 
-{ #category : #'init entities' }
+{ #category : 'init entities' }
 ECECModel >> initializeAgents [
 
 	self
@@ -81,7 +82,7 @@ ECECModel >> initializeAgents [
 		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
 ]
 
-{ #category : #init }
+{ #category : 'init' }
 ECECModel >> islandEnvironment [
 
 	| x y |
@@ -94,21 +95,21 @@ ECECModel >> islandEnvironment [
 		(x % 6 <= 2 and: [ y % 6 <= 2 ]) ifFalse: [ cell biomass: 0 ] ].
 ]
 
-{ #category : #probes }
+{ #category : 'probes' }
 ECECModel >> numberOfRestrainedForagers [
 
 	<probe>
 	^ self theRestrainedForagers size
 ]
 
-{ #category : #probes }
+{ #category : 'probes' }
 ECECModel >> numberOfUnrestrainedForagers [
 
 	<probe>
 	^ self theUnrestrainedForagers size
 ]
 
-{ #category : #init }
+{ #category : 'init' }
 ECECModel >> remoteIslandEnvironment [
 
 	| x y |
@@ -121,7 +122,7 @@ ECECModel >> remoteIslandEnvironment [
 		(x % 12 <= 3 and: [ y % 12 <= 3 ]) ifFalse: [ cell biomass: 0 ] ].
 ]
 
-{ #category : #init }
+{ #category : 'init' }
 ECECModel >> smallEnvironment [
 
 	self
@@ -145,7 +146,7 @@ ECECModel >> smallEnvironment [
 		displayPov: #defaultPOV of: ECECForager
 ]
 
-{ #category : #control }
+{ #category : 'control' }
 ECECModel >> step: anObject [
 
 	self
@@ -153,46 +154,46 @@ ECECModel >> step: anObject [
 		askRandom: ECECForager toDo: #step
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theRestrainedForagers [
 	<getterFor: #ECECRestrainedForager>
 
 	^ theRestrainedForagers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theRestrainedForagers: anObject [
 
 	theRestrainedForagers := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theUnrestrainedForagers [
 	<getterFor: #ECECUnrestrainedForager>
 
 	^ theUnrestrainedForagers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theUnrestrainedForagers: anObject [
 
 	theUnrestrainedForagers := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theVegetationUnits [
 	<getterFor: #ECECVegetationUnit>
 
 	^ theVegetationUnits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ECECModel >> theVegetationUnits: anObject [
 
 	theVegetationUnits := anObject
 ]
 
-{ #category : #probes }
+{ #category : 'probes' }
 ECECModel >> totalAmountOfBiomass [
 
 	<probe>
