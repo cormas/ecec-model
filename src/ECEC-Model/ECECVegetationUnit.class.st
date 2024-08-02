@@ -1,6 +1,8 @@
 Class {
 	#name : 'ECECVegetationUnit',
 	#superclass : 'CMSpatialEntityElement',
+	#traits : 'TCMMath',
+	#classTraits : 'TCMMath classTrait',
 	#instVars : [
 		'biomass'
 	],
@@ -60,7 +62,7 @@ ECECVegetationUnit >> initialize [
 { #category : 'initialization' }
 ECECVegetationUnit >> initializeWithRandomBiomass [
 
-	self biomass: Cormas random
+	self biomass: self random
 ]
 
 { #category : 'printing' }
@@ -75,7 +77,7 @@ ECECVegetationUnit >> interestingDetails [
 { #category : 'growth' }
 ECECVegetationUnit >> logisticGrowth [
 
-	self biomass: (Cormas logisticGrowth: self biomass r: self class r K: self class k)
+	self biomass: (self logisticGrowth: self biomass r: self class r k: self class k)
 ]
 
 { #category : 'pov' }

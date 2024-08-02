@@ -47,8 +47,8 @@ ECECModel class >> initialNumberOfUnrestrainedForagers [
 ECECModel >> homogeneousEnvironment [
 
 	self
-		createGridLines: 27
-		columns: 27
+		createGridNumberOfRows: 27
+		numberOfColumns: 27
 		neighbourhood: 8
 		closed: false.
 		

@@ -118,7 +118,7 @@ ECECForager >> reproduce [
 	freePatch := self nearestEmptyLocationWithinRadius: 1.
 	freePatch ifNil: [ ^ self ].
 	
-	newForager := self newEntity: self class.
+	newForager := self cormasModel newEntity: self class.
 	self energy: self energy - newForager energy.
 	
 	newForager moveTo: freePatch
