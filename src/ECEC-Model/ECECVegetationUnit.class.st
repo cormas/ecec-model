@@ -14,16 +14,36 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'accessing' }
-ECECVegetationUnit class >> k [
+{ #category : 'class initialization' }
+ECECVegetationUnit class >> initializeParameters [
 
-	^ 10 
+	super initializeParameters.
+	k := 10.
+	r := 0.2.
 ]
 
-{ #category : 'accessing' }
-ECECVegetationUnit class >> r [
+{ #category : 'parameters' }
+ECECVegetationUnit class >> k [
+	<parameterGetter>
+	^ k
+]
 
-	^ 0.2 
+{ #category : 'parameters' }
+ECECVegetationUnit class >> k: aNumber [
+	<parameterSetter>
+	k := aNumber
+]
+
+{ #category : 'parameters' }
+ECECVegetationUnit class >> r [
+	<parameterGetter>
+	^ r
+]
+
+{ #category : 'parameters' }
+ECECVegetationUnit class >> r: aNumber [
+	<parameterSetter>
+	r := aNumber
 ]
 
 { #category : 'converting' }

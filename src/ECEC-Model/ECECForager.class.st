@@ -6,6 +6,11 @@ Class {
 	#instVars : [
 		'energy'
 	],
+	#classInstVars : [
+		'catabolicRate',
+		'fertilityThreshold',
+		'harvestRate'
+	],
 	#category : 'ECEC-Model',
 	#package : 'ECEC-Model'
 }
@@ -13,19 +18,46 @@ Class {
 { #category : 'accessing' }
 ECECForager class >> catabolicRate [
 
-	^ 2
+	^ catabolicRate
+]
+
+{ #category : 'accessing' }
+ECECForager class >> catabolicRate: aNumber [
+
+	catabolicRate := aNumber
 ]
 
 { #category : 'accessing' }
 ECECForager class >> fertilityThreshold [
 
-	^ 100
+	^ fertilityThreshold
+]
+
+{ #category : 'accessing' }
+ECECForager class >> fertilityThreshold: aNumber [
+
+	fertilityThreshold := aNumber
 ]
 
 { #category : 'accessing' }
 ECECForager class >> harvestRate [
 
-	self subclassResponsibility
+	^ harvestRate
+]
+
+{ #category : 'accessing' }
+ECECForager class >> harvestRate: aNumber [
+
+	harvestRate := aNumber
+]
+
+{ #category : 'initialization' }
+ECECForager class >> initializeParameters [
+
+	super initializeParameters.
+	fertilityThreshold := 100.
+	catabolicRate := 2.
+	harvestRate := nil.
 ]
 
 { #category : 'biology' }
