@@ -126,8 +126,8 @@ ECECModel >> remoteIslandEnvironment [
 ECECModel >> smallEnvironment [
 
 	self
-		createGridLines: 4
-		columns: 4
+		createGridNumberOfRows: 4
+		numberOfColumns: 4
 		neighbourhood: 8
 		closed: false.
 		
