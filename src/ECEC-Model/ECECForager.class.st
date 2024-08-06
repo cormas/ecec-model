@@ -16,12 +16,6 @@ ECECForager class >> catabolicRate [
 	^ 2
 ]
 
-{ #category : 'default' }
-ECECForager class >> defaultProbes [
-
-	^ self probes
-]
-
 { #category : 'accessing' }
 ECECForager class >> fertilityThreshold [
 
