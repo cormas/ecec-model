@@ -6,15 +6,13 @@ Class {
 	#instVars : [
 		'biomass'
 	],
+	#classInstVars : [
+		'k',
+		'r'
+	],
 	#category : 'ECEC-Model',
 	#package : 'ECEC-Model'
 }
-
-{ #category : 'accessing' }
-ECECVegetationUnit class >> entityName [
-
-	^ 'VegetationUnit'
-]
 
 { #category : 'accessing' }
 ECECVegetationUnit class >> k [

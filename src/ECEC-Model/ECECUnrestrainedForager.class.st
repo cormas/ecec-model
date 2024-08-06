@@ -6,12 +6,6 @@ Class {
 }
 
 { #category : 'accessing' }
-ECECUnrestrainedForager class >> entityName [
-
-	^ 'UnrestrainedForager'
-]
-
-{ #category : 'accessing' }
 ECECUnrestrainedForager class >> harvestRate [
 
 	^ 0.99
