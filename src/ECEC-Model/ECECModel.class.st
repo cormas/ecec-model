@@ -45,7 +45,7 @@ ECECModel class >> initialNumberOfUnrestrainedForagers [
 
 { #category : 'init' }
 ECECModel >> homogeneousEnvironment [
-
+	<init>
 	self
 		createGridNumberOfRows: 27
 		numberOfColumns: 27
@@ -84,7 +84,7 @@ ECECModel >> initializeAgents [
 
 { #category : 'init' }
 ECECModel >> islandEnvironment [
-
+	<init>
 	| x y |
 	self homogeneousEnvironment.
 	
@@ -111,7 +111,7 @@ ECECModel >> numberOfUnrestrainedForagers [
 
 { #category : 'init' }
 ECECModel >> remoteIslandEnvironment [
-
+	<init>
 	| x y |
 	self homogeneousEnvironment.
 	
@@ -124,7 +124,7 @@ ECECModel >> remoteIslandEnvironment [
 
 { #category : 'init' }
 ECECModel >> smallEnvironment [
-
+	<init>
 	self
 		createGridNumberOfRows: 4
 		numberOfColumns: 4
@@ -148,7 +148,7 @@ ECECModel >> smallEnvironment [
 
 { #category : 'control' }
 ECECModel >> step: anObject [
-
+	<control>
 	self
 		stepEntities: self theVegetationUnits;
 		askRandom: ECECForager toDo: #step
