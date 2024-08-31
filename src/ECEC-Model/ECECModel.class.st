@@ -54,10 +54,10 @@ ECECModel >> homogeneousEnvironment [
 		
 	self theVegetationUnits do: [ :each | each initializeWithRandomBiomass ].
 	
-	self
-		initializeAgents;
-		displayPov: #povBiomass of: ECECVegetationUnit;
-		displayPov: #defaultPOV of: ECECForager
+	self initializeAgents.
+	
+	ECECVegetationUnit activePovSelector: #povBiomass.
+	ECECForager activePovSelector: #defaultPOV
 ]
 
 { #category : 'initialization' }
@@ -141,9 +141,8 @@ ECECModel >> smallEnvironment [
 		createN: 1
 		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
 	
-	self
-		displayPov: #povBiomass of: ECECVegetationUnit;
-		displayPov: #defaultPOV of: ECECForager
+	ECECVegetationUnit activePovSelector: #povBiomass.
+	ECECForager activePovSelector: #defaultPOV
 ]
 
 { #category : 'control' }
