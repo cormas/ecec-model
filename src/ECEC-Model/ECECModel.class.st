@@ -98,14 +98,14 @@ ECECModel >> islandEnvironment [
 { #category : 'probes' }
 ECECModel >> numberOfRestrainedForagers [
 
-	<probeNamed: 'Number of restrained foragers'>
+	<probeNamed: 'Number of restrained foragers' color: '0000FF'>
 	^ self theRestrainedForagers size
 ]
 
 { #category : 'probes' }
 ECECModel >> numberOfUnrestrainedForagers [
 
-	<probeNamed: 'Number of unrestrained foragers'>
+	<probeNamed: 'Number of unrestrained foragers' color: 'FF0000'>
 	^ self theUnrestrainedForagers size
 ]
 
@@ -195,6 +195,6 @@ ECECModel >> theVegetationUnits: anObject [
 { #category : 'probes' }
 ECECModel >> totalAmountOfBiomass [
 
-	<probeNamed: 'Total amount of biomass'>
+	<probeNamed: 'Total amount of biomass' color: '00b44c'>
 	^ self theVegetationUnits sum: [ :each | each biomass ]
 ]
