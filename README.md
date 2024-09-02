@@ -12,7 +12,7 @@ ECEC Model implemented using Cormas platform
 
 ```st
 Metacello new
-    repository: 'github://cormas/ecec-model';
+    repository: 'github://cormas/ecec-model:main';
     baseline: 'ECECModel';
     load.
 ```
