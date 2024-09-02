@@ -57,7 +57,7 @@ ECECModel >> homogeneousEnvironment [
 	self initializeAgents.
 	
 	ECECVegetationUnit activePovSelector: #povBiomass.
-	ECECForager activePovSelector: #defaultPOV
+	ECECForager activePovSelector: #pov
 ]
 
 { #category : 'initialization' }
@@ -142,7 +142,7 @@ ECECModel >> smallEnvironment [
 		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
 	
 	ECECVegetationUnit activePovSelector: #povBiomass.
-	ECECForager activePovSelector: #defaultPOV
+	ECECForager activePovSelector: #pov
 ]
 
 { #category : 'control' }

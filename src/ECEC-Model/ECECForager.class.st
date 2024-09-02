@@ -134,6 +134,13 @@ ECECForager >> pov [
 	self subclassResponsibility
 ]
 
+{ #category : 'pov' }
+ECECForager >> povEnergy [
+
+	<pov>
+	self subclassResponsibility
+]
+
 { #category : 'biology' }
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
