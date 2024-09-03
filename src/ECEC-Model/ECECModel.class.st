@@ -10,21 +10,6 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : '- probes' }
-ECECModel class >> colorOfProbe_numberOfRestrainedForagers [
-  ^ (Color r: 0.05278592375366569 g: 0.0 b: 1.0 alpha: 1.0)
-]
-
-{ #category : '- probes' }
-ECECModel class >> colorOfProbe_numberOfUnrestrainedForagers [
-  ^ (Color r: 1.0 g: 0.0 b: 0.0019550342130987292 alpha: 1.0)
-]
-
-{ #category : '- probes' }
-ECECModel class >> colorOfProbe_totalAmountOfBiomass [
-  ^ (Color r: 0.21700879765395895 g: 1.0 b: 0.0 alpha: 1.0)
-]
-
 { #category : 'simulation settings' }
 ECECModel class >> defaultInit [
 
@@ -41,6 +26,12 @@ ECECModel class >> initialNumberOfRestrainedForagers [
 ECECModel class >> initialNumberOfUnrestrainedForagers [
 
 	^ 10
+]
+
+{ #category : 'tests - printing' }
+ECECModel class >> prefix [
+
+	^ 'ECEC'
 ]
 
 { #category : 'init' }
