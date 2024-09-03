@@ -10,10 +10,20 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'simulation settings' }
-ECECModel class >> defaultInit [
+{ #category : 'menu' }
+ECECModel class >> aboutThisModel [
 
-	^ #homogeneousEnvironment
+	^ '# ECEC Model
+
+This is a simple implementation of a **very powerful** agent-based model. For more information, visit [our website](https://cormas.org).
+
+## Agents
+
+There are two types of agents:
+
+1. Restrained foragers
+2. Unrestrained foragers
+'
 ]
 
 { #category : 'accessing' }
