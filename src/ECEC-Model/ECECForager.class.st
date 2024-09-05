@@ -9,7 +9,8 @@ Class {
 	#classInstVars : [
 		'catabolicRate',
 		'fertilityThreshold',
-		'harvestRate'
+		'harvestRate',
+		'initialEnergy'
 	],
 	#category : 'ECEC-Model',
 	#package : 'ECEC-Model'
@@ -51,12 +52,25 @@ ECECForager class >> harvestRate: aNumber [
 	harvestRate := aNumber
 ]
 
+{ #category : 'accessing' }
+ECECForager class >> initialEnergy [
+
+	^ initialEnergy
+]
+
+{ #category : 'accessing' }
+ECECForager class >> initialEnergy: aNumber [
+
+	initialEnergy := aNumber
+]
+
 { #category : 'initialization' }
 ECECForager class >> initializeParameters [
 
 	super initializeParameters.
 	fertilityThreshold := 100.
 	catabolicRate := 2.
+	initialEnergy := 50.
 	harvestRate := nil.
 ]
 
@@ -95,7 +109,7 @@ ECECForager >> energy: anObject [
 ECECForager >> initialize [
 
 	super initialize.
-	energy := 50.
+	energy := self class initialEnergy.
 ]
 
 { #category : 'printing' }
@@ -131,14 +145,7 @@ ECECForager >> move [
 ECECForager >> pov [
 
 	<pov>
-	self subclassResponsibility
-]
-
-{ #category : 'pov' }
-ECECForager >> povEnergy [
-
-	<pov>
-	self subclassResponsibility
+	^ CMPointOfView size: self sizeOfPOV
 ]
 
 { #category : 'biology' }

@@ -70,6 +70,11 @@ ECECVegetationUnit >> biomass: anObject [
 	biomass := anObject
 ]
 
+{ #category : 'as yet unclassified' }
+ECECVegetationUnit >> hello [
+^ 'world'
+]
+
 { #category : 'initialization' }
 ECECVegetationUnit >> initialize [ 
 
@@ -102,11 +107,11 @@ ECECVegetationUnit >> logisticGrowth [
 ECECVegetationUnit >> povBiomass [
 
 	<pov>
-	^ self
-		povAttribute: #biomass
+	^ CMPointOfView color: (self
+		colorAttribute: #biomass
 		min: 0
 		max: self class k
-		color: Color green
+		color: Color green)
 ]
 
 { #category : 'pov' }
@@ -114,7 +119,7 @@ ECECVegetationUnit >> povBiomassForager [
 	
 	<pov>
 	^ self biomass < ECECForager catabolicRate
-		ifTrue: [ Color white ]
+		ifTrue: [ CMPointOfView color: Color white ]
 		ifFalse: [ self povBiomass ]
 ]
 
@@ -128,7 +133,7 @@ ECECVegetationUnit >> povForagersVision [
 	(self neighbourhood anySatisfy: [ :each | each hasOccupantsOfClass: ECECForager ])
 		ifTrue: [ ^ self povBiomassForager ].
 	
-	^ Color black
+	^ CMPointOfView color: Color black
 ]
 
 { #category : 'stepping' }

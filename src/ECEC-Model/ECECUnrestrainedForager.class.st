@@ -16,16 +16,20 @@ ECECUnrestrainedForager class >> initializeParameters [
 ECECUnrestrainedForager >> pov [
 
 	<pov>
-	^ Color red
+	^ super pov
+		color: Color red;
+		yourself
 ]
 
 { #category : 'pov' }
 ECECUnrestrainedForager >> povEnergy [
 
 	<pov>
-	^ self
-		  povAttribute: #energy
+	^ super pov
+		color: (self
+		  colorAttribute: #energy
 		  min: 0
 		  max: 180
-		  color: Color red
+		  color: Color red);
+		yourself
 ]
