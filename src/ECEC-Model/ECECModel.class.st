@@ -250,3 +250,17 @@ ECECModel >> totalAmountOfBiomass [
 	<probeNamed: 'Total amount of biomass' color: '00b44c'>
 	^ self theVegetationUnits sum: [ :each | each biomass ]
 ]
+
+{ #category : 'probes' }
+ECECModel >> totalEnergyOfRestrained [
+
+	<probeNamed: 'Total energy of restrained foragers' color: 'CCFFFF'>
+	^ self theRestrainedForagers sum: [ :each | each energy ]
+]
+
+{ #category : 'probes' }
+ECECModel >> totalEnergyOfUnrestrained [
+
+	<probeNamed: 'Total energy of unestrained foragers' color: 'FF00FF'>
+	^ self theUnrestrainedForagers sum: [ :each | each energy ]
+]
