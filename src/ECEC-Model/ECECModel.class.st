@@ -6,6 +6,12 @@ Class {
 		'theUnrestrainedForagers',
 		'theVegetationUnits'
 	],
+	#classInstVars : [
+		'numberOfRows',
+		'numberOfColumns',
+		'initialNumberOfRestrainedForagers',
+		'initialNumberOfUnrestrainedForagers'
+	],
 	#category : 'ECEC-Model',
 	#package : 'ECEC-Model'
 }
@@ -29,13 +35,59 @@ There are two types of agents:
 { #category : 'accessing' }
 ECECModel class >> initialNumberOfRestrainedForagers [
 
-	^ 10
+	^ initialNumberOfRestrainedForagers
+]
+
+{ #category : 'accessing' }
+ECECModel class >> initialNumberOfRestrainedForagers: anObject [
+
+	initialNumberOfRestrainedForagers := anObject
 ]
 
 { #category : 'accessing' }
 ECECModel class >> initialNumberOfUnrestrainedForagers [
 
-	^ 10
+	^ initialNumberOfUnrestrainedForagers
+]
+
+{ #category : 'accessing' }
+ECECModel class >> initialNumberOfUnrestrainedForagers: anObject [
+
+	initialNumberOfUnrestrainedForagers := anObject
+]
+
+{ #category : 'initialization' }
+ECECModel class >> initializeParameters [
+
+	super initializeParameters.
+	numberOfRows := 27.
+	numberOfColumns := 27.
+	initialNumberOfRestrainedForagers := 10.
+	initialNumberOfUnrestrainedForagers := 10.
+]
+
+{ #category : 'accessing' }
+ECECModel class >> numberOfColumns [
+
+	^ numberOfColumns
+]
+
+{ #category : 'accessing' }
+ECECModel class >> numberOfColumns: anObject [
+
+	numberOfColumns := anObject
+]
+
+{ #category : 'accessing' }
+ECECModel class >> numberOfRows [
+
+	^ numberOfRows
+]
+
+{ #category : 'accessing' }
+ECECModel class >> numberOfRows: anObject [
+
+	numberOfRows := anObject
 ]
 
 { #category : 'tests - printing' }
@@ -48,17 +100,16 @@ ECECModel class >> prefix [
 ECECModel >> homogeneousEnvironment [
 	<init>
 	self
-		createGridNumberOfRows: 27
-		numberOfColumns: 27
-		neighbourhood: 8
-		closed: false.
+		createGridNumberOfRows: self class numberOfRows
+		numberOfColumns: self class numberOfColumns
+		neighbourhood: 4
+		closed: true.
 		
 	self theVegetationUnits do: [ :each | each initializeWithRandomBiomass ].
 	
 	self initializeAgents.
 	
-	ECECVegetationUnit activePovSelector: #povBiomass.
-	ECECForager activePovSelector: #pov
+	ECECVegetationUnit activePovSelector: #povBiomass
 ]
 
 { #category : 'initialization' }

@@ -4,7 +4,8 @@ Class {
 	#traits : 'TCMLocated',
 	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
-		'energy'
+		'energy',
+		'counter'
 	],
 	#classInstVars : [
 		'catabolicRate',
@@ -80,6 +81,12 @@ ECECForager >> consumeEnergy [
 	self energy: self energy - self class catabolicRate
 ]
 
+{ #category : 'as yet unclassified' }
+ECECForager >> cowPovClass [
+
+	self subclassResponsibility
+]
+
 { #category : 'biology' }
 ECECForager >> eat [
 	"The forager eats a quatity of biomass of its current location. The quantity depends on the harvestRate: a proportion of biomass (50% or 99% according to forager type)"
@@ -110,6 +117,7 @@ ECECForager >> initialize [
 
 	super initialize.
 	energy := self class initialEnergy.
+	counter := 1
 ]
 
 { #category : 'printing' }
@@ -148,6 +156,31 @@ ECECForager >> pov [
 	^ CMPointOfView size: self sizeOfPOV
 ]
 
+{ #category : 'pov' }
+ECECForager >> povImage [
+
+	<pov>
+	| frames image |
+	
+	image := self patch biomass > 0
+		ifTrue: [
+			frames := self cowPovClass walking.
+			frames at: ((counter - 1) \\ frames size) + 1 ]
+		ifFalse: [ 
+			| boat cow |
+			boat := CMBoat swimming first.
+			boat := boat flipBy: #horizontal centerAt: boat center.
+			boat := (Form extent: boat extent max asPoint depth: boat depth) + boat.
+			boat := boat movedDownBy: 5.
+
+			cow := self cowPovClass lying first movedUpBy: 5.
+			boat + cow ].
+	
+	^ CMPointOfView
+		image: image
+		size: 32
+]
+
 { #category : 'biology' }
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
@@ -167,11 +200,13 @@ ECECForager >> reproduce [
 { #category : 'povSize' }
 ECECForager >> sizeOfPOV [
 
-	^ 2 + (self energy / self class fertilityThreshold * 20)
+	^ 2 + (self energy / self class fertilityThreshold * 10)
 ]
 
 { #category : 'stepping' }
 ECECForager >> step [
+
+	counter := counter + 1.
 
 	self
 		consumeEnergy;
