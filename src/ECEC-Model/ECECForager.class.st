@@ -77,7 +77,7 @@ ECECForager class >> initializeParameters [
 
 { #category : 'biology' }
 ECECForager >> consumeEnergy [
-
+	<action>
 	self energy: self energy - self class catabolicRate
 ]
 
@@ -91,6 +91,7 @@ ECECForager >> cowPovClass [
 ECECForager >> eat [
 	"The forager eats a quatity of biomass of its current location. The quantity depends on the harvestRate: a proportion of biomass (50% or 99% according to forager type)"
 	
+	<action>
 	| quantity |
 	patch ifNil: [ ^ nil ].
 	
@@ -133,6 +134,7 @@ ECECForager >> interestingDetails [
 ECECForager >> move [
 	"The Forager examines its current location and around. From thw patches that are not occupied, it chooses the one containing the most biomass. If the chosen patch has enough biomass to meet the catabolic rate, the Forager moves there. If not, it moves instead to a randomly chosen adjacent free place (not occupied by another Forager)"	
 
+	<action>
 	| candidatePatches maxBiomass targetPatch |
 	patch ifNil: [ ^ self ].
 	
@@ -185,6 +187,7 @@ ECECForager >> povImage [
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
 	
+	<action>
 	| newForager freePatch |
 	patch ifNil: [ ^ self ].
 	
@@ -200,12 +203,13 @@ ECECForager >> reproduce [
 { #category : 'povSize' }
 ECECForager >> sizeOfPOV [
 
-	^ 2 + (self energy / self class fertilityThreshold * 10)
+	^ 2 + (self energy / self class fertilityThreshold * 20)
 ]
 
 { #category : 'stepping' }
 ECECForager >> step [
 
+	<action>
 	counter := counter + 1.
 
 	self
