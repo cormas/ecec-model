@@ -71,6 +71,12 @@ ECECVegetationUnit >> biomass: anObject [
 	biomass := anObject
 ]
 
+{ #category : 'growth' }
+ECECVegetationUnit >> growBiomass [
+	<action>
+	self biomass: (self logisticGrowth: self biomass r: self class r k: self class k)
+]
+
 { #category : 'as yet unclassified' }
 ECECVegetationUnit >> hello [
 ^ 'world'
@@ -97,12 +103,6 @@ ECECVegetationUnit >> interestingDetails [
 	^ super interestingDetails , { 
 		'Biomass' -> ((biomass truncateTo: 0.005) asString)
 		}
-]
-
-{ #category : 'growth' }
-ECECVegetationUnit >> logisticGrowth [
-
-	self biomass: (self logisticGrowth: self biomass r: self class r k: self class k)
 ]
 
 { #category : 'pov' }
@@ -169,5 +169,5 @@ ECECVegetationUnit >> povImage [
 ECECVegetationUnit >> step [
 	
 	counter := counter + 1.
-	self logisticGrowth
+	self growBiomass
 ]
