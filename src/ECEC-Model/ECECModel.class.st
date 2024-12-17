@@ -140,7 +140,7 @@ ECECModel >> islandEnvironment [
 	| x y |
 	self homogeneousEnvironment.
 	
-	self theCells do: [ :cell |
+	self cells do: [ :cell |
 		x := cell coordinates x.
 		y := cell coordinates y.
 		
