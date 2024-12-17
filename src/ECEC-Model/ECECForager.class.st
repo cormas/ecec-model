@@ -203,7 +203,7 @@ ECECForager >> reproduce [
 { #category : 'povSize' }
 ECECForager >> sizeOfPOV [
 
-	^ 2 + (self energy / self class fertilityThreshold * 20)
+	^ 0.1 + (self energy / self class fertilityThreshold)
 ]
 
 { #category : 'stepping' }
