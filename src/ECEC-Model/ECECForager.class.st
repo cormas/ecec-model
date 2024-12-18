@@ -180,7 +180,7 @@ ECECForager >> povImage [
 	
 	^ CMPointOfView
 		image: image
-		size: 32
+		size: self sizeOfPOV
 ]
 
 { #category : 'biology' }
