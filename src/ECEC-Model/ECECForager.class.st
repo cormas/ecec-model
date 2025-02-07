@@ -81,7 +81,7 @@ ECECForager >> consumeEnergy [
 	self energy: self energy - self class catabolicRate
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'pov' }
 ECECForager >> cowPovClass [
 
 	self subclassResponsibility

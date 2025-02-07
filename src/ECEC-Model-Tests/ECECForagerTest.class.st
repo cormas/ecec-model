@@ -1,14 +1,15 @@
 Class {
-	#name : #ECECForagerTest,
-	#superclass : #TestCase,
+	#name : 'ECECForagerTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'restrainedForager',
 		'unrestrainedForager'
 	],
-	#category : #'ECEC-Model-Tests'
+	#category : 'ECEC-Model-Tests',
+	#package : 'ECEC-Model-Tests'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ECECForagerTest >> setUp [
 
 	super setUp.
@@ -16,10 +17,10 @@ ECECForagerTest >> setUp [
 	unrestrainedForager := ECECUnrestrainedForager new.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ECECForagerTest >> testPov [
 
-	self assert: restrainedForager pov isColor.
-	self assert: unrestrainedForager pov isColor.
+	self assert: restrainedForager pov color isColor.
+	self assert: unrestrainedForager pov color isColor.
 	self deny: restrainedForager pov equals: unrestrainedForager pov.
 ]

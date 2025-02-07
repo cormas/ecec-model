@@ -12,7 +12,7 @@ ECECUnrestrainedForager class >> initializeParameters [
 	harvestRate := 0.99.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'pov' }
 ECECUnrestrainedForager >> cowPovClass [
 	
 	^ CMBrownCow

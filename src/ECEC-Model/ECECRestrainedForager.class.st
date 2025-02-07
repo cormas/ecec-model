@@ -12,7 +12,7 @@ ECECRestrainedForager class >> initializeParameters [
 	harvestRate := 0.5.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'pov' }
 ECECRestrainedForager >> cowPovClass [
 
 	^ CMPurpleCow
