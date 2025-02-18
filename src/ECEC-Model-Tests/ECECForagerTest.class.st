@@ -9,12 +9,20 @@ Class {
 	#package : 'ECEC-Model-Tests'
 }
 
-{ #category : 'initialization' }
+{ #category : 'running' }
 ECECForagerTest >> setUp [
 
 	super setUp.
 	restrainedForager := ECECRestrainedForager new.
 	unrestrainedForager := ECECUnrestrainedForager new.
+	
+]
+
+{ #category : 'running' }
+ECECForagerTest >> tearDown [ 
+
+	ECECForager initializeParameters.
+	super tearDown.
 ]
 
 { #category : 'tests' }
