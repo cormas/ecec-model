@@ -21,7 +21,8 @@ ECECForagerTest >> setUp [
 { #category : 'running' }
 ECECForagerTest >> tearDown [ 
 
-	ECECForager initializeParameters.
+	ECECUnrestrainedForager initializeParameters.
+	ECECRestrainedForager initializeParameters.
 	super tearDown.
 ]
 
@@ -63,17 +64,47 @@ ECECForagerTest >> testFertilityThreshold [
 { #category : 'tests' }
 ECECForagerTest >> testHarvestRate [
 
-	ECECForager harvestRate: 13.	
+	ECECUnrestrainedForager harvestRate: 13.	
 		
-	self assert: ECECForager harvestRate equals: 13.
+	self assert: ECECUnrestrainedForager harvestRate equals: 13.
 ]
 
 { #category : 'tests' }
-ECECForagerTest >> testInitialEnergy [
+ECECForagerTest >> testInitialCatabolicRate [
+
+	self assert: ECECForager catabolicRate equals: 2.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialEnergy [	
+		
+	self assert: ECECForager initialEnergy equals: 50.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialEnergySet [
 
 	ECECForager initialEnergy: 13.	
 		
 	self assert: ECECForager initialEnergy equals: 13.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialFertilityThreshold [
+
+	self assert: ECECRestrainedForager fertilityThreshold equals: 100.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialHarvestRateRestrained [
+		
+	self assert: ECECRestrainedForager harvestRate equals: 0.5.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialHarvestRateUnrestrained [
+		
+	self assert: ECECUnrestrainedForager harvestRate equals: 0.99.
 ]
 
 { #category : 'tests' }
