@@ -69,11 +69,35 @@ ECECForagerTest >> testHarvestRate [
 ]
 
 { #category : 'tests' }
-ECECForagerTest >> testInitialEnergy [
+ECECForagerTest >> testInitialCatabolicRate [
+
+	self assert: ECECForager catabolicRate equals: 2.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialEnergy [	
+		
+	self assert: ECECForager initialEnergy equals: 50.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialEnergySet [
 
 	ECECForager initialEnergy: 13.	
 		
 	self assert: ECECForager initialEnergy equals: 13.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialFertilityThreshold [
+
+	self assert: ECECRestrainedForager fertilityThreshold equals: 100.
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testInitialHarvestRate [	
+		
+	self assert: ECECForager harvestRate equals: nil.
 ]
 
 { #category : 'tests' }
