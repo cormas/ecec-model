@@ -3,7 +3,8 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'restrainedForager',
-		'unrestrainedForager'
+		'unrestrainedForager',
+		'model'
 	],
 	#category : 'ECEC-Model-Tests',
 	#package : 'ECEC-Model-Tests'
@@ -13,9 +14,18 @@ Class {
 ECECForagerTest >> setUp [
 
 	super setUp.
-	restrainedForager := ECECRestrainedForager new.
-	unrestrainedForager := ECECUnrestrainedForager new.
+	model := ECECModel new.
 	
+	model 
+		createGridNumberOfRows: 3
+		numberOfColumns: 3
+		neighbourhood: 8
+		closed: true.
+		
+	restrainedForager := model newEntity: ECECRestrainedForager.
+	unrestrainedForager := model newEntity: ECECUnrestrainedForager.
+	
+
 ]
 
 { #category : 'running' }
@@ -37,12 +47,10 @@ ECECForagerTest >> testCatabolicRate [
 { #category : 'tests' }
 ECECForagerTest >> testConsumeEnergy [
 	
-	| newEnergy |
 	restrainedForager energy: 13.	
 	restrainedForager consumeEnergy.
-	newEnergy := restrainedForager energy.
 		
-	self assert: newEnergy < 13.
+	self assert: restrainedForager energy < 13.
 ]
 
 { #category : 'tests' }
@@ -108,6 +116,45 @@ ECECForagerTest >> testInitialHarvestRateUnrestrained [
 ]
 
 { #category : 'tests' }
+ECECForagerTest >> testMove [
+
+	|centralCell|
+	
+	centralCell := model pickCellAt: 2@2.
+	restrainedForager moveTo: centralCell.
+	restrainedForager move.
+	
+	self deny: restrainedForager patch equals: centralCell .
+	
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testMoveWhenNoFreeSpace [
+
+	|centralCell|
+	
+	centralCell := model pickCellAt: 2@2.
+	restrainedForager moveTo: centralCell.
+	restrainedForager patch neighbourhood do: [ :cell | 
+		(model newEntity: ECECRestrainedForager) moveTo: cell].
+	restrainedForager move.
+	
+	self assert: restrainedForager patch equals: centralCell.
+	
+]
+
+{ #category : 'tests - reproduction' }
+ECECForagerTest >> testNoReproductionWithLowEnergy [
+
+	restrainedForager moveTo: (model pickCellAt: 2@2).
+	restrainedForager energy: 13.
+	restrainedForager step.
+	
+	self assert: restrainedForager neighbouringSimilarAgents isEmpty.
+	
+]
+
+{ #category : 'tests' }
 ECECForagerTest >> testPov [
 		
 	self assert: restrainedForager pov color isColor.
@@ -116,21 +163,55 @@ ECECForagerTest >> testPov [
 ]
 
 { #category : 'tests' }
-ECECForagerTest >> testPovCowClassRestrained [
-
-	self assert: restrainedForager cowPovClass equals: CMPurpleCow.
-]
-
-{ #category : 'tests' }
-ECECForagerTest >> testPovCowClassUnrestrained [
-
-	self assert: unrestrainedForager cowPovClass equals: CMBrownCow.
-]
-
-{ #category : 'tests' }
 ECECForagerTest >> testPovEnergyClass [
 
 	| pov |
 	pov := restrainedForager povEnergy. 
 	self assert: pov class equals: CMPointOfView. 
+]
+
+{ #category : 'tests - reproduction' }
+ECECForagerTest >> testReproduceWhenNoFreeSpace [
+
+	| centralCell initialNumberOfAgents |
+	
+	centralCell := model pickCellAt: 2@2.
+	restrainedForager moveTo: centralCell.
+	restrainedForager patch neighbourhood do: [ :cell | 
+		(model newEntity: ECECRestrainedForager  ) moveTo: cell].
+	
+	initialNumberOfAgents := model agents size. 
+	restrainedForager energy: 113.
+	restrainedForager reproduce.
+	
+	self
+		assert: model agents size
+		equals: initialNumberOfAgents - 1.
+	
+]
+
+{ #category : 'tests - reproduction' }
+ECECForagerTest >> testReproductionWithHighEnergy [
+
+	restrainedForager moveTo: (model pickCellAt: 2@2).
+	restrainedForager energy: 113.
+	restrainedForager step.
+	
+	self assert: restrainedForager neighbouringSimilarAgents isNotEmpty.
+	
+]
+
+{ #category : 'tests' }
+ECECForagerTest >> testStepWhenEnergyIsLessThenZero [
+
+	| firstCell initialNumberOfAgents |
+	
+	firstCell := model pickCellAt: 1@1.
+	restrainedForager moveTo: firstCell.
+	initialNumberOfAgents := model agents size.
+	restrainedForager energy: -13.
+	restrainedForager step.
+	
+	self assert: model agents size equals: initialNumberOfAgents - 1.
+	
 ]
