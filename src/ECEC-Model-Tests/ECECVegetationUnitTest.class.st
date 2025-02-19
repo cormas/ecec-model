@@ -37,7 +37,7 @@ ECECVegetationUnitTest >> testAsString [
 ]
 
 { #category : 'tests' }
-ECECVegetationUnitTest >> testBiomassAccessors [
+ECECVegetationUnitTest >> testBiomass [
 
 	vegetationUnit biomass: 13.
 	
