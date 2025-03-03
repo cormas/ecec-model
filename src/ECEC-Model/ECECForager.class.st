@@ -132,7 +132,7 @@ ECECForager >> interestingDetails [
 
 { #category : 'biology' }
 ECECForager >> move [
-	"The Forager examines its current location and around. From thw patches that are not occupied, it chooses the one containing the most biomass. If the chosen patch has enough biomass to meet the catabolic rate, the Forager moves there. If not, it moves instead to a randomly chosen adjacent free place (not occupied by another Forager)"	
+	"The Forager examines its current location and around. From the patches that are not occupied, it chooses the one containing the most biomass. If the chosen patch has enough biomass to meet the catabolic rate, the Forager moves there. If not, it moves instead to a randomly chosen adjacent free place (not occupied by another Forager)"	
 
 	<action>
 	| candidatePatches maxBiomass targetPatch |
