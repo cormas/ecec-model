@@ -186,7 +186,7 @@ ECECForagerTest >> testReproduceWhenNoFreeSpace [
 	
 	self
 		assert: model agents size
-		equals: initialNumberOfAgents - 1.
+		equals: initialNumberOfAgents
 	
 ]
 
