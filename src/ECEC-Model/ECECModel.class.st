@@ -208,6 +208,13 @@ ECECModel >> smallEnvironment [
 ]
 
 { #category : 'control' }
+ECECModel >> step [
+	<control>
+	self theVegetationUnits do: #step.
+	self allForagers shuffled do: #step.
+]
+
+{ #category : 'control' }
 ECECModel >> step: anObject [
 	<control>
 	self
