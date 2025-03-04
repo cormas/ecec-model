@@ -53,6 +53,27 @@ ECECForagerTest >> testConsumeEnergy [
 	self assert: restrainedForager energy < 13.
 ]
 
+{ #category : 'tests - reproduction' }
+ECECForagerTest >> testEat [
+
+	| centralCell initialBiomass initialEnergy |
+	
+	centralCell := model pickCellAt: 2@2.
+	restrainedForager moveTo: centralCell.
+	
+	initialBiomass := centralCell biomass. 
+	initialEnergy := restrainedForager energy.
+ 	restrainedForager eat.
+	
+	self
+		assert: centralCell biomass
+		equals: initialBiomass * (1 - ECECRestrainedForager harvestRate).
+	self
+		assert: restrainedForager energy
+		equals: initialEnergy + (centralCell biomass * ECECRestrainedForager harvestRate)
+	
+]
+
 { #category : 'tests' }
 ECECForagerTest >> testEnergy [
 
@@ -168,6 +189,24 @@ ECECForagerTest >> testPovEnergyClass [
 	| pov |
 	pov := restrainedForager povEnergy. 
 	self assert: pov class equals: CMPointOfView. 
+]
+
+{ #category : 'tests - reproduction' }
+ECECForagerTest >> testReproduce [
+
+	| centralCell initialNumberOfAgents |
+	
+	centralCell := model pickCellAt: 2@2.
+	restrainedForager moveTo: centralCell.
+	
+	initialNumberOfAgents := model agents size. 
+	restrainedForager energy: 113.
+	restrainedForager reproduce.
+	
+	self
+		assert: model agents size
+		equals: initialNumberOfAgents + 1
+	
 ]
 
 { #category : 'tests - reproduction' }

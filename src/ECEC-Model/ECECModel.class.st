@@ -96,6 +96,16 @@ ECECModel class >> prefix [
 	^ 'ECEC'
 ]
 
+{ #category : 'accessing' }
+ECECModel >> allForagers [
+	<getterFor: #ECECForager>
+
+	| all |
+	all := self theRestrainedForagers copy.
+	all addAll: self theUnrestrainedForagers.
+	^all
+]
+
 { #category : 'init' }
 ECECModel >> homogeneousEnvironment [
 	<init>
@@ -167,7 +177,7 @@ ECECModel >> remoteIslandEnvironment [
 	| x y |
 	self homogeneousEnvironment.
 	
-	self theCells do: [ :cell |
+	self cells do: [ :cell |
 		x := cell coordinates x.
 		y := cell coordinates y.
 		
