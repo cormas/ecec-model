@@ -67,6 +67,12 @@ ECECModel class >> initializeParameters [
 ]
 
 { #category : 'accessing' }
+ECECModel class >> modelName [
+
+	^ 'ECEC'
+]
+
+{ #category : 'accessing' }
 ECECModel class >> numberOfColumns [
 
 	^ numberOfColumns
