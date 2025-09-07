@@ -1,8 +1,6 @@
 Class {
 	#name : 'ECECForager',
 	#superclass : 'CMAgent',
-	#traits : 'TCMLocated',
-	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'energy',
 		'counter'
