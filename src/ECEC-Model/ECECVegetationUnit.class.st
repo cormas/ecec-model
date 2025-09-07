@@ -1,6 +1,6 @@
 Class {
 	#name : 'ECECVegetationUnit',
-	#superclass : 'CMSpatialEntityElement',
+	#superclass : 'CMCell',
 	#traits : 'TCMMath',
 	#classTraits : 'TCMMath classTrait',
 	#instVars : [
