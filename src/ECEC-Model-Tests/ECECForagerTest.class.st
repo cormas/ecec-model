@@ -145,7 +145,7 @@ ECECForagerTest >> testMove [
 	restrainedForager moveTo: centralCell.
 	restrainedForager move.
 	
-	self deny: restrainedForager patch equals: centralCell .
+	self deny: restrainedForager cell equals: centralCell .
 	
 ]
 
@@ -156,11 +156,11 @@ ECECForagerTest >> testMoveWhenNoFreeSpace [
 	
 	centralCell := model pickCellAt: 2@2.
 	restrainedForager moveTo: centralCell.
-	restrainedForager patch neighbourhood do: [ :cell | 
+	restrainedForager cell neighbourhood do: [ :cell | 
 		(model newEntity: ECECRestrainedForager) moveTo: cell].
 	restrainedForager move.
 	
-	self assert: restrainedForager patch equals: centralCell.
+	self assert: restrainedForager cell equals: centralCell.
 	
 ]
 
@@ -216,7 +216,7 @@ ECECForagerTest >> testReproduceWhenNoFreeSpace [
 	
 	centralCell := model pickCellAt: 2@2.
 	restrainedForager moveTo: centralCell.
-	restrainedForager patch neighbourhood do: [ :cell | 
+	restrainedForager cell neighbourhood do: [ :cell | 
 		(model newEntity: ECECRestrainedForager  ) moveTo: cell].
 	
 	initialNumberOfAgents := model agents size. 
