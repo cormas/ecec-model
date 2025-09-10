@@ -91,12 +91,12 @@ ECECForager >> eat [
 	
 	<action>
 	| quantity |
-	patch ifNil: [ ^ nil ].
+	self cell ifNil: [ ^ nil ].
 	
-	quantity := self patch biomass * self class harvestRate.
+	quantity := self cell biomass * self class harvestRate.
 	
 	self energy: self energy + quantity.
-	self patch biomass: self patch biomass - quantity
+	self cell biomass: self cell biomass - quantity
 ]
 
 { #category : 'accessing' }
@@ -134,9 +134,9 @@ ECECForager >> move [
 
 	<action>
 	| candidatePatches maxBiomass targetPatch |
-	patch ifNil: [ ^ self ].
+	self cell ifNil: [ ^ self ].
 	
-	candidatePatches := self patch neighbourhoodAndSelf select: [ :each |
+	candidatePatches := self cell neighbourhoodAndSelf select: [ :each |
 		each biomass > self class catabolicRate and: [ each hasNoOccupants ] ].
 	
 	candidatePatches ifEmpty: [
@@ -162,7 +162,7 @@ ECECForager >> povImage [
 	<pov>
 	| frames image |
 	
-	image := self patch biomass > 0
+	image := self cell biomass > 0
 		ifTrue: [
 			frames := self cowPovClass walking.
 			frames at: ((counter - 1) \\ frames size) + 1 ]
@@ -187,7 +187,7 @@ ECECForager >> reproduce [
 	
 	<action>
 	| newForager freePatch |
-	patch ifNil: [ ^ self ].
+	cell ifNil: [ ^ self ].
 	
 	freePatch := self nearestEmptyLocationWithinRadius: 1.
 	freePatch ifNil: [ ^ self ].

@@ -154,7 +154,7 @@ ECECVegetationUnit >> povImage [
 			stageIndex := maxBiomass min: 
 				(((stages size * (biomass - minBiomass)) / (maxBiomass - minBiomass)) floor + 1).
 			
-			grass := CMGrass grassFor: self condition: [ :cell | cell biomass > 0 ].
+			grass := CMGrass grassFor: self condition: [ :aCell | aCell biomass > 0 ].
 			grass := grass scaledToSize: 28@28.
 			
 			grass + (stages at: stageIndex) ]

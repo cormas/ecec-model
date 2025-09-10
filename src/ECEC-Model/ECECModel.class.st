@@ -145,11 +145,11 @@ ECECModel >> islandEnvironment [
 	| x y |
 	self homogeneousEnvironment.
 	
-	self cells do: [ :cell |
-		x := cell coordinates x.
-		y := cell coordinates y.
+	self cells do: [ :each |
+		x := each coordinates x.
+		y := each coordinates y.
 		
-		(x % 6 <= 2 and: [ y % 6 <= 2 ]) ifFalse: [ cell biomass: 0 ] ].
+		(x % 6 <= 2 and: [ y % 6 <= 2 ]) ifFalse: [ each biomass: 0 ] ].
 ]
 
 { #category : 'probes' }
@@ -172,11 +172,11 @@ ECECModel >> remoteIslandEnvironment [
 	| x y |
 	self homogeneousEnvironment.
 	
-	self cells do: [ :cell |
-		x := cell coordinates x.
-		y := cell coordinates y.
+	self cells do: [ :each |
+		x := each coordinates x.
+		y := each coordinates y.
 		
-		(x % 12 <= 3 and: [ y % 12 <= 3 ]) ifFalse: [ cell biomass: 0 ] ].
+		(x % 12 <= 3 and: [ y % 12 <= 3 ]) ifFalse: [ each biomass: 0 ] ].
 ]
 
 { #category : 'init' }
