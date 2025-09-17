@@ -2,8 +2,7 @@ Class {
 	#name : 'ECECForager',
 	#superclass : 'CMAgent',
 	#instVars : [
-		'energy',
-		'counter'
+		'energy'
 	],
 	#classInstVars : [
 		'catabolicRate',
@@ -115,8 +114,7 @@ ECECForager >> energy: anObject [
 ECECForager >> initialize [
 
 	super initialize.
-	energy := self class initialEnergy.
-	counter := 1
+	energy := self class initialEnergy
 ]
 
 { #category : 'printing' }
@@ -156,31 +154,6 @@ ECECForager >> pov [
 	^ CMPointOfView size: self sizeOfPOV
 ]
 
-{ #category : 'pov' }
-ECECForager >> povImage [
-
-	<pov>
-	| frames image |
-	
-	image := self cell biomass > 0
-		ifTrue: [
-			frames := self cowPovClass walking.
-			frames at: ((counter - 1) \\ frames size) + 1 ]
-		ifFalse: [ 
-			| boat cow |
-			boat := CMBoat swimming first.
-			boat := boat flipBy: #horizontal centerAt: boat center.
-			boat := (Form extent: boat extent max asPoint depth: boat depth) + boat.
-			boat := boat movedDownBy: 5.
-
-			cow := self cowPovClass lying first movedUpBy: 5.
-			boat + cow ].
-	
-	^ CMPointOfView
-		image: image
-		size: self sizeOfPOV
-]
-
 { #category : 'biology' }
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
@@ -208,7 +181,6 @@ ECECForager >> sizeOfPOV [
 ECECForager >> step [
 
 	<action>
-	counter := counter + 1.
 
 	self
 		consumeEnergy;

@@ -4,8 +4,7 @@ Class {
 	#traits : 'TCMMath',
 	#classTraits : 'TCMMath classTrait',
 	#instVars : [
-		'biomass',
-		'counter'
+		'biomass'
 	],
 	#classInstVars : [
 		'k',
@@ -77,17 +76,11 @@ ECECVegetationUnit >> growBiomass [
 	self biomass: (self logisticGrowth: self biomass r: self class r k: self class k)
 ]
 
-{ #category : 'as yet unclassified' }
-ECECVegetationUnit >> hello [
-^ 'world'
-]
-
 { #category : 'initialization' }
 ECECVegetationUnit >> initialize [ 
 
 	super initialize.
-	biomass := 0.
-	counter := 0.
+	biomass := 0
 ]
 
 { #category : 'initialization' }
@@ -138,36 +131,8 @@ ECECVegetationUnit >> povForagersVision [
 	^ CMPointOfView color: Color black
 ]
 
-{ #category : 'pov' }
-ECECVegetationUnit >> povImage [
-
-	<pov>
-	| frames image minBiomass maxBiomass stages stageIndex rand grass |
-	
-	minBiomass := 0.
-	maxBiomass := self class k.
-	
-	image := biomass > 0
-		ifTrue: [ 
-			rand := Random seed: id.
-			stages := { CMFarmingPlants corn . CMFarmingPlants carrot } atRandom: rand.
-			stageIndex := maxBiomass min: 
-				(((stages size * (biomass - minBiomass)) / (maxBiomass - minBiomass)) floor + 1).
-			
-			grass := CMGrass grassFor: self condition: [ :aCell | aCell biomass > 0 ].
-			grass := grass scaledToSize: 28@28.
-			
-			grass + (stages at: stageIndex) ]
-		ifFalse: [
-			frames := CMWater flowing.
-			frames at: ((id + counter - 1) \\ frames size) + 1 ].
-		
-	^ CMPointOfView image: image
-]
-
 { #category : 'stepping' }
 ECECVegetationUnit >> step [
 	
-	counter := counter + 1.
 	self growBiomass
 ]

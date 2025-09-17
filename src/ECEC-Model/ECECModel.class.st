@@ -14,9 +14,7 @@ Class {
 { #category : 'menu' }
 ECECModel class >> aboutThisModel [
 
-	^ '# ECEC Model
-
-This is a simple implementation of a **very powerful** agent-based model. For more information, visit [our website](https://cormas.org).
+	^ 'This is a simple implementation of a **very powerful** agent-based model. For more information, visit [our website](https://cormas.org).
 
 ## Agents
 

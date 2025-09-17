@@ -13,12 +13,6 @@ ECECRestrainedForager class >> initializeParameters [
 ]
 
 { #category : 'pov' }
-ECECRestrainedForager >> cowPovClass [
-
-	^ CMPurpleCow
-]
-
-{ #category : 'pov' }
 ECECRestrainedForager >> pov [
 
 	<pov>

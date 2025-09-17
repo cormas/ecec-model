@@ -13,12 +13,6 @@ ECECUnrestrainedForager class >> initializeParameters [
 ]
 
 { #category : 'pov' }
-ECECUnrestrainedForager >> cowPovClass [
-	
-	^ CMBrownCow
-]
-
-{ #category : 'pov' }
 ECECUnrestrainedForager >> pov [
 
 	<pov>
