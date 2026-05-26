@@ -16,7 +16,7 @@ Class {
 
 { #category : 'accessing' }
 ECECForager class >> catabolicRate [
-
+	<parameterIntegerDefault: 2>
 	^ catabolicRate
 ]
 
@@ -28,7 +28,7 @@ ECECForager class >> catabolicRate: aNumber [
 
 { #category : 'accessing' }
 ECECForager class >> fertilityThreshold [
-
+	<parameterIntegerDefault: 100>
 	^ fertilityThreshold
 ]
 
@@ -52,7 +52,7 @@ ECECForager class >> harvestRate: aNumber [
 
 { #category : 'accessing' }
 ECECForager class >> initialEnergy [
-
+	<parameterIntegerDefault: 50>
 	^ initialEnergy
 ]
 
@@ -60,16 +60,6 @@ ECECForager class >> initialEnergy [
 ECECForager class >> initialEnergy: aNumber [
 
 	initialEnergy := aNumber
-]
-
-{ #category : 'initialization' }
-ECECForager class >> initializeParameters [
-
-	super initializeParameters.
-	fertilityThreshold := 100.
-	catabolicRate := 2.
-	initialEnergy := 50.
-	harvestRate := nil.
 ]
 
 { #category : 'biology' }

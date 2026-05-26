@@ -14,17 +14,9 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'class initialization' }
-ECECVegetationUnit class >> initializeParameters [
-
-	super initializeParameters.
-	k := 10.
-	r := 0.2.
-]
-
 { #category : 'parameters' }
 ECECVegetationUnit class >> k [
-	<parameterGetter>
+	<parameterIntegerDefault: 10>
 	^ k
 ]
 
@@ -36,7 +28,7 @@ ECECVegetationUnit class >> k: aNumber [
 
 { #category : 'parameters' }
 ECECVegetationUnit class >> r [
-	<parameterGetter>
+	<parameterFloatDefault: 0.2>
 	^ r
 ]
 

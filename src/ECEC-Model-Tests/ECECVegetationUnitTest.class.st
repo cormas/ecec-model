@@ -16,13 +16,6 @@ ECECVegetationUnitTest >> setUp [
 	vegetationUnit randomNumberGenerator: (Random seed: 13).
 ]
 
-{ #category : 'running' }
-ECECVegetationUnitTest >> tearDown [ 
-
-	ECECVegetationUnit initializeParameters.
-	super tearDown. 
-]
-
 { #category : 'tests' }
 ECECVegetationUnitTest >> testAsString [
 	
@@ -67,6 +60,7 @@ ECECVegetationUnitTest >> testInitialBiomassIsZero [
 { #category : 'tests' }
 ECECVegetationUnitTest >> testInitializeParameters [
 	
+	ECECModel new. "to reset the parameters and get rid of the side effects"
 	self assert: ECECVegetationUnit k equals: 10.
 	self assert: ECECVegetationUnit r equals: 0.2.
 	

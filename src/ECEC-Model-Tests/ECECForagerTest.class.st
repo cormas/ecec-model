@@ -28,14 +28,6 @@ ECECForagerTest >> setUp [
 
 ]
 
-{ #category : 'running' }
-ECECForagerTest >> tearDown [ 
-
-	ECECUnrestrainedForager initializeParameters.
-	ECECRestrainedForager initializeParameters.
-	super tearDown.
-]
-
 { #category : 'tests' }
 ECECForagerTest >> testCatabolicRate [
 

@@ -5,11 +5,10 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'class initialization' }
-ECECUnrestrainedForager class >> initializeParameters [
-
-	super initializeParameters.
-	harvestRate := 0.99.
+{ #category : 'accessing' }
+ECECUnrestrainedForager class >> harvestRate [
+	<parameterFloatDefault: 0.99>
+	^ harvestRate
 ]
 
 { #category : 'pov' }
