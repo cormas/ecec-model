@@ -1,6 +1,6 @@
 Class {
 	#name : 'ECECModel',
-	#superclass : 'CMAbstractModel',
+	#superclass : 'CMModel',
 	#instVars : [
 		'numberOfRows',
 		'numberOfColumns',
@@ -107,6 +107,12 @@ ECECModel >> initializeAgents [
 	self
 		createN: initialNumberOfUnrestrainedForagers
 		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
+]
+
+{ #category : 'testing' }
+ECECModel >> isOneForagerClassExtinct [
+	<boolean>
+	^ self numberOfRestrainedForagers = 0 or: [ self numberOfUnrestrainedForagers = 0 ]
 ]
 
 { #category : 'init' }
