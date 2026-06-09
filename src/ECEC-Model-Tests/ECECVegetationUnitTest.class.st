@@ -10,10 +10,14 @@ Class {
 
 { #category : 'running' }
 ECECVegetationUnitTest >> setUp [
+	| context |
 	super setUp.
+	
+	context := CMSimulationContext new.
+	context randomSeed: 13.
 
 	vegetationUnit := ECECVegetationUnit new.
-	vegetationUnit randomNumberGenerator: (Random seed: 13).
+	vegetationUnit simulationContext: context.
 ]
 
 { #category : 'tests' }
