@@ -101,12 +101,12 @@ ECECModel >> initialNumberOfUnrestrainedForagers: anObject [
 ECECModel >> initializeAgents [
 
 	self
-		createN: initialNumberOfRestrainedForagers
-		randomlyLocatedAloneEntities: ECECRestrainedForager.
-		
+		create: initialNumberOfRestrainedForagers
+		randomlyLocatedAloneEntitiesOfClass: ECECRestrainedForager.
+
 	self
-		createN: initialNumberOfUnrestrainedForagers
-		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
+		create: initialNumberOfUnrestrainedForagers
+		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager
 ]
 
 { #category : 'testing' }
@@ -181,23 +181,25 @@ ECECModel >> remoteIslandEnvironment [
 
 { #category : 'init' }
 ECECModel >> smallEnvironment [
+
 	<init>
 	self
 		createGridNumberOfRows: 4
 		numberOfColumns: 4
 		neighbourhood: 8
 		closed: false.
-		
-	(self @@ ECECVegetationUnit) do: [ :each | each initializeWithRandomBiomass ].
-	
+
+	self @@ ECECVegetationUnit do: [ :each |
+		each initializeWithRandomBiomass ].
+
 	self
-		createN: 1
-		randomlyLocatedAloneEntities: ECECRestrainedForager.
-		
+		create: 1
+		randomlyLocatedAloneEntitiesOfClass: ECECRestrainedForager.
+
 	self
-		createN: 1
-		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
-	
+		create: 1
+		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager.
+
 	ECECVegetationUnit activePovSelector: #povBiomass.
 	ECECForager activePovSelector: #pov
 ]
