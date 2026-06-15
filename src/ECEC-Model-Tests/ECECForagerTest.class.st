@@ -28,14 +28,6 @@ ECECForagerTest >> setUp [
 
 ]
 
-{ #category : 'running' }
-ECECForagerTest >> tearDown [ 
-
-	ECECUnrestrainedForager initializeParameters.
-	ECECRestrainedForager initializeParameters.
-	super tearDown.
-]
-
 { #category : 'tests' }
 ECECForagerTest >> testCatabolicRate [
 
@@ -58,7 +50,7 @@ ECECForagerTest >> testEat [
 
 	| centralCell initialBiomass initialEnergy |
 	
-	centralCell := model pickCellAt: 2@2.
+	centralCell := model cellAt: 2 at: 2.
 	restrainedForager moveTo: centralCell.
 	
 	initialBiomass := centralCell biomass. 
@@ -141,7 +133,7 @@ ECECForagerTest >> testMove [
 
 	|centralCell|
 	
-	centralCell := model pickCellAt: 2@2.
+	centralCell := model cellAt: 2 at: 2.
 	restrainedForager moveTo: centralCell.
 	restrainedForager move.
 	
@@ -154,7 +146,7 @@ ECECForagerTest >> testMoveWhenNoFreeSpace [
 
 	|centralCell|
 	
-	centralCell := model pickCellAt: 2@2.
+	centralCell := model cellAt: 2 at: 2.
 	restrainedForager moveTo: centralCell.
 	restrainedForager cell neighbourhood do: [ :cell | 
 		(model newEntity: ECECRestrainedForager) moveTo: cell].
@@ -167,7 +159,7 @@ ECECForagerTest >> testMoveWhenNoFreeSpace [
 { #category : 'tests - reproduction' }
 ECECForagerTest >> testNoReproductionWithLowEnergy [
 
-	restrainedForager moveTo: (model pickCellAt: 2@2).
+	restrainedForager moveTo: (model cellAt: 2 at: 2).
 	restrainedForager energy: 13.
 	restrainedForager step.
 	
@@ -196,7 +188,7 @@ ECECForagerTest >> testReproduce [
 
 	| centralCell initialNumberOfAgents |
 	
-	centralCell := model pickCellAt: 2@2.
+	centralCell := model cellAt: 2 at: 2.
 	restrainedForager moveTo: centralCell.
 	
 	initialNumberOfAgents := model agents size. 
@@ -214,7 +206,7 @@ ECECForagerTest >> testReproduceWhenNoFreeSpace [
 
 	| centralCell initialNumberOfAgents |
 	
-	centralCell := model pickCellAt: 2@2.
+	centralCell := model cellAt: 2 at: 2.
 	restrainedForager moveTo: centralCell.
 	restrainedForager cell neighbourhood do: [ :cell | 
 		(model newEntity: ECECRestrainedForager  ) moveTo: cell].
@@ -232,7 +224,7 @@ ECECForagerTest >> testReproduceWhenNoFreeSpace [
 { #category : 'tests - reproduction' }
 ECECForagerTest >> testReproductionWithHighEnergy [
 
-	restrainedForager moveTo: (model pickCellAt: 2@2).
+	restrainedForager moveTo: (model cellAt: 2 at: 2).
 	restrainedForager energy: 113.
 	restrainedForager step.
 	
@@ -245,7 +237,7 @@ ECECForagerTest >> testStepWhenEnergyIsLessThenZero [
 
 	| firstCell initialNumberOfAgents |
 	
-	firstCell := model pickCellAt: 1@1.
+	firstCell := model cellAt: 1 at: 1.
 	restrainedForager moveTo: firstCell.
 	initialNumberOfAgents := model agents size.
 	restrainedForager energy: -13.

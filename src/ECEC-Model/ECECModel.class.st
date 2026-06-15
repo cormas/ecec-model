@@ -1,6 +1,12 @@
 Class {
 	#name : 'ECECModel',
 	#superclass : 'CMAbstractModel',
+	#instVars : [
+		'numberOfRows',
+		'numberOfColumns',
+		'initialNumberOfRestrainedForagers',
+		'initialNumberOfUnrestrainedForagers'
+	],
 	#classInstVars : [
 		'numberOfRows',
 		'numberOfColumns',
@@ -14,9 +20,7 @@ Class {
 { #category : 'menu' }
 ECECModel class >> aboutThisModel [
 
-	^ '# ECEC Model
-
-This is a simple implementation of a **very powerful** agent-based model. For more information, visit [our website](https://cormas.org).
+	^ 'This is a simple implementation of a **very powerful** agent-based model. For more information, visit [our website](https://cormas.org).
 
 ## Agents
 
@@ -28,67 +32,9 @@ There are two types of agents:
 ]
 
 { #category : 'accessing' }
-ECECModel class >> initialNumberOfRestrainedForagers [
-
-	^ initialNumberOfRestrainedForagers
-]
-
-{ #category : 'accessing' }
-ECECModel class >> initialNumberOfRestrainedForagers: anObject [
-
-	initialNumberOfRestrainedForagers := anObject
-]
-
-{ #category : 'accessing' }
-ECECModel class >> initialNumberOfUnrestrainedForagers [
-
-	^ initialNumberOfUnrestrainedForagers
-]
-
-{ #category : 'accessing' }
-ECECModel class >> initialNumberOfUnrestrainedForagers: anObject [
-
-	initialNumberOfUnrestrainedForagers := anObject
-]
-
-{ #category : 'initialization' }
-ECECModel class >> initializeParameters [
-
-	super initializeParameters.
-	numberOfRows := 27.
-	numberOfColumns := 27.
-	initialNumberOfRestrainedForagers := 10.
-	initialNumberOfUnrestrainedForagers := 10.
-]
-
-{ #category : 'accessing' }
 ECECModel class >> modelName [
 
 	^ 'ECEC'
-]
-
-{ #category : 'accessing' }
-ECECModel class >> numberOfColumns [
-
-	^ numberOfColumns
-]
-
-{ #category : 'accessing' }
-ECECModel class >> numberOfColumns: anObject [
-
-	numberOfColumns := anObject
-]
-
-{ #category : 'accessing' }
-ECECModel class >> numberOfRows [
-
-	^ numberOfRows
-]
-
-{ #category : 'accessing' }
-ECECModel class >> numberOfRows: anObject [
-
-	numberOfRows := anObject
 ]
 
 { #category : 'tests - printing' }
@@ -115,8 +61,8 @@ ECECModel >> allForagers [
 ECECModel >> homogeneousEnvironment [
 	<init>
 	self
-		createGridNumberOfRows: self class numberOfRows
-		numberOfColumns: self class numberOfColumns
+		createGridNumberOfRows: numberOfRows
+		numberOfColumns: numberOfColumns
 		neighbourhood: 4
 		closed: true.
 		
@@ -127,16 +73,46 @@ ECECModel >> homogeneousEnvironment [
 	ECECVegetationUnit activePovSelector: #povBiomass
 ]
 
+{ #category : 'parameters' }
+ECECModel >> initialNumberOfRestrainedForagers [
+	<parameterIntegerDefault: 10>
+	^ initialNumberOfRestrainedForagers
+]
+
+{ #category : 'parameters' }
+ECECModel >> initialNumberOfRestrainedForagers: anObject [
+
+	initialNumberOfRestrainedForagers := anObject
+]
+
+{ #category : 'parameters' }
+ECECModel >> initialNumberOfUnrestrainedForagers [
+	<parameterIntegerDefault: 10>
+	^ initialNumberOfUnrestrainedForagers
+]
+
+{ #category : 'parameters' }
+ECECModel >> initialNumberOfUnrestrainedForagers: anObject [
+
+	initialNumberOfUnrestrainedForagers := anObject
+]
+
 { #category : 'init entities' }
 ECECModel >> initializeAgents [
 
 	self
-		createN: self class initialNumberOfRestrainedForagers
-		randomlyLocatedAloneEntities: ECECRestrainedForager.
-		
+		create: initialNumberOfRestrainedForagers
+		randomlyLocatedAloneEntitiesOfClass: ECECRestrainedForager.
+
 	self
-		createN: self class initialNumberOfUnrestrainedForagers
-		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
+		create: initialNumberOfUnrestrainedForagers
+		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager
+]
+
+{ #category : 'testing' }
+ECECModel >> isOneForagerClassExtinct [
+	<boolean>
+	^ self numberOfRestrainedForagers = 0 or: [ self numberOfUnrestrainedForagers = 0 ]
 ]
 
 { #category : 'init' }
@@ -152,11 +128,35 @@ ECECModel >> islandEnvironment [
 		(x % 6 <= 2 and: [ y % 6 <= 2 ]) ifFalse: [ each biomass: 0 ] ].
 ]
 
+{ #category : 'parameters' }
+ECECModel >> numberOfColumns [
+	<parameterIntegerMin: 1 max: 50 default: 27>
+	^ numberOfColumns
+]
+
+{ #category : 'parameters' }
+ECECModel >> numberOfColumns: anObject [
+
+	numberOfColumns := anObject
+]
+
 { #category : 'probes' }
 ECECModel >> numberOfRestrainedForagers [
 
 	<probeNamed: 'Number of restrained foragers' color: '0000FF'>
 	^ (self @@ ECECRestrainedForager) size
+]
+
+{ #category : 'parameters' }
+ECECModel >> numberOfRows [
+	<parameterIntegerMin: 1 max: 50 default: 27>
+	^ numberOfRows
+]
+
+{ #category : 'parameters' }
+ECECModel >> numberOfRows: anObject [
+
+	numberOfRows := anObject
 ]
 
 { #category : 'probes' }
@@ -181,23 +181,25 @@ ECECModel >> remoteIslandEnvironment [
 
 { #category : 'init' }
 ECECModel >> smallEnvironment [
+
 	<init>
 	self
 		createGridNumberOfRows: 4
 		numberOfColumns: 4
 		neighbourhood: 8
 		closed: false.
-		
-	(self @@ ECECVegetationUnit) do: [ :each | each initializeWithRandomBiomass ].
-	
+
+	self @@ ECECVegetationUnit do: [ :each |
+		each initializeWithRandomBiomass ].
+
 	self
-		createN: 1
-		randomlyLocatedAloneEntities: ECECRestrainedForager.
-		
+		create: 1
+		randomlyLocatedAloneEntitiesOfClass: ECECRestrainedForager.
+
 	self
-		createN: 1
-		randomlyLocatedAloneEntities: ECECUnrestrainedForager.
-	
+		create: 1
+		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager.
+
 	ECECVegetationUnit activePovSelector: #povBiomass.
 	ECECForager activePovSelector: #pov
 ]
@@ -206,15 +208,7 @@ ECECModel >> smallEnvironment [
 ECECModel >> step [
 	<control>
 	(self @@ ECECVegetationUnit) do: #step.
-	self allForagers shuffled do: #step.
-]
-
-{ #category : 'control' }
-ECECModel >> step: anObject [
-	<control>
-	self
-		stepEntities: (self @@ ECECVegetationUnit);
-		askRandom: ECECForager toDo: #step
+	(self shuffled: self allForagers) do: #step.
 ]
 
 { #category : 'probes' }

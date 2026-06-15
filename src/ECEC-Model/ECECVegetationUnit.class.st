@@ -4,8 +4,7 @@ Class {
 	#traits : 'TCMMath',
 	#classTraits : 'TCMMath classTrait',
 	#instVars : [
-		'biomass',
-		'counter'
+		'biomass'
 	],
 	#classInstVars : [
 		'k',
@@ -15,17 +14,9 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'class initialization' }
-ECECVegetationUnit class >> initializeParameters [
-
-	super initializeParameters.
-	k := 10.
-	r := 0.2.
-]
-
 { #category : 'parameters' }
 ECECVegetationUnit class >> k [
-	<parameterGetter>
+	<parameterIntegerDefault: 10>
 	^ k
 ]
 
@@ -37,7 +28,7 @@ ECECVegetationUnit class >> k: aNumber [
 
 { #category : 'parameters' }
 ECECVegetationUnit class >> r [
-	<parameterGetter>
+	<parameterFloatDefault: 0.2>
 	^ r
 ]
 
@@ -77,17 +68,11 @@ ECECVegetationUnit >> growBiomass [
 	self biomass: (self logisticGrowth: self biomass r: self class r k: self class k)
 ]
 
-{ #category : 'as yet unclassified' }
-ECECVegetationUnit >> hello [
-^ 'world'
-]
-
 { #category : 'initialization' }
 ECECVegetationUnit >> initialize [ 
 
 	super initialize.
-	biomass := 0.
-	counter := 0.
+	biomass := 0
 ]
 
 { #category : 'initialization' }
@@ -138,36 +123,8 @@ ECECVegetationUnit >> povForagersVision [
 	^ CMPointOfView color: Color black
 ]
 
-{ #category : 'pov' }
-ECECVegetationUnit >> povImage [
-
-	<pov>
-	| frames image minBiomass maxBiomass stages stageIndex rand grass |
-	
-	minBiomass := 0.
-	maxBiomass := self class k.
-	
-	image := biomass > 0
-		ifTrue: [ 
-			rand := Random seed: id.
-			stages := { CMFarmingPlants corn . CMFarmingPlants carrot } atRandom: rand.
-			stageIndex := maxBiomass min: 
-				(((stages size * (biomass - minBiomass)) / (maxBiomass - minBiomass)) floor + 1).
-			
-			grass := CMGrass grassFor: self condition: [ :aCell | aCell biomass > 0 ].
-			grass := grass scaledToSize: 28@28.
-			
-			grass + (stages at: stageIndex) ]
-		ifFalse: [
-			frames := CMWater flowing.
-			frames at: ((id + counter - 1) \\ frames size) + 1 ].
-		
-	^ CMPointOfView image: image
-]
-
 { #category : 'stepping' }
 ECECVegetationUnit >> step [
 	
-	counter := counter + 1.
 	self growBiomass
 ]

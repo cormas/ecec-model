@@ -10,17 +10,14 @@ Class {
 
 { #category : 'running' }
 ECECVegetationUnitTest >> setUp [
+	| context |
 	super setUp.
+	
+	context := CMSimulationContext new.
+	context randomSeed: 13.
 
 	vegetationUnit := ECECVegetationUnit new.
-	vegetationUnit randomNumberGenerator: (Random seed: 13).
-]
-
-{ #category : 'running' }
-ECECVegetationUnitTest >> tearDown [ 
-
-	ECECVegetationUnit initializeParameters.
-	super tearDown. 
+	vegetationUnit simulationContext: context.
 ]
 
 { #category : 'tests' }
@@ -67,6 +64,7 @@ ECECVegetationUnitTest >> testInitialBiomassIsZero [
 { #category : 'tests' }
 ECECVegetationUnitTest >> testInitializeParameters [
 	
+	ECECModel new. "to reset the parameters and get rid of the side effects"
 	self assert: ECECVegetationUnit k equals: 10.
 	self assert: ECECVegetationUnit r equals: 0.2.
 	

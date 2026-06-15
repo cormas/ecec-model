@@ -5,17 +5,10 @@ Class {
 	#package : 'ECEC-Model'
 }
 
-{ #category : 'class initialization' }
-ECECRestrainedForager class >> initializeParameters [
-
-	super initializeParameters.
-	harvestRate := 0.5.
-]
-
-{ #category : 'pov' }
-ECECRestrainedForager >> cowPovClass [
-
-	^ CMPurpleCow
+{ #category : 'accessing' }
+ECECRestrainedForager class >> harvestRate [
+	<parameterFloatDefault: 0.5>
+	^ harvestRate
 ]
 
 { #category : 'pov' }
