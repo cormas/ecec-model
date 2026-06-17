@@ -81,15 +81,6 @@ ECECVegetationUnit >> initializeWithRandomBiomass [
 	self biomass: self random
 ]
 
-{ #category : 'printing' }
-ECECVegetationUnit >> interestingDetails [
-	"Answer a <Collection> of interesting receiver's attributes, from a modeler point of view, to display in a popup for example"
-
-	^ super interestingDetails , { 
-		'Biomass' -> ((biomass truncateTo: 0.005) asString)
-		}
-]
-
 { #category : 'pov' }
 ECECVegetationUnit >> povBiomass [
 
