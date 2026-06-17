@@ -25,8 +25,8 @@ ECECUnrestrainedForager >> povEnergy [
 
 	<pov>
 	^ super pov
-		color: (self
-		  colorAttribute: #energy
+		color: (CMColor
+		  colorValue: energy
 		  min: 0
 		  max: 180
 		  color: Color red);

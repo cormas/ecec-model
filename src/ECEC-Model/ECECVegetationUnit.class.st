@@ -94,8 +94,8 @@ ECECVegetationUnit >> interestingDetails [
 ECECVegetationUnit >> povBiomass [
 
 	<pov>
-	^ CMPointOfView color: (self
-		colorAttribute: #biomass
+	^ CMPointOfView color: (CMColor
+		colorValue: biomass
 		min: 0
 		max: self class k
 		color: Color green)
