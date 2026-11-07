@@ -1,0 +1,5 @@
+{
+	"baseline" : "ECECModel",
+	"summary" : "Evolution of Cooperation in an Ecological Context, after Pepper and Smuts (2000). Restrained foragers eat half of a plant's energy and unrestrained ones nearly all of it. Foragers move to the richest plant around them, reproduce and die, and the spatial pattern of plants decides which strategy survives.",
+	"cormas" : "1.0-dev"
+}
