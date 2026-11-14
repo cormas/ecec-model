@@ -50,6 +50,39 @@ ECECVegetationUnit >> asString [
  				<< (biomass truncateTo: 0.005) asString ]
 ]
 
+{ #category : 'aspects' }
+ECECVegetationUnit >> aspectBiomass: look [
+	<aspect>
+	look colorShadeOf: Color green forValue: biomass from: 0 to: self class k
+]
+
+{ #category : 'aspects' }
+ECECVegetationUnit >> aspectBiomassForager: look [
+
+	<aspect>
+	self biomass < ECECForager catabolicRate
+		ifTrue: [ look color: Color white ]
+		ifFalse: [ self aspectBiomass: look ]
+]
+
+{ #category : 'aspects' }
+ECECVegetationUnit >> aspectDefault: look [
+
+	<aspect>
+	self aspectBiomass: look
+]
+
+{ #category : 'aspects' }
+ECECVegetationUnit >> aspectForagersVision: look [
+
+	<aspect>
+	((self hasOccupantsOfClass: ECECForager) or: [
+			 self neighbourhood anySatisfy: [ :each |
+				 each hasOccupantsOfClass: ECECForager ] ])
+		ifTrue: [ self aspectBiomassForager: look ]
+		ifFalse: [ look color: Color black ]
+]
+
 { #category : 'accessing' }
 ECECVegetationUnit >> biomass [
 
@@ -88,39 +121,6 @@ ECECVegetationUnit >> interestingDetails [
 	^ super interestingDetails , { 
 		'Biomass' -> ((biomass truncateTo: 0.005) asString)
 		}
-]
-
-{ #category : 'pov' }
-ECECVegetationUnit >> povBiomass [
-
-	<pov>
-	^ CMPointOfView color: (CMColor
-		colorValue: biomass
-		min: 0
-		max: self class k
-		color: Color green)
-]
-
-{ #category : 'pov' }
-ECECVegetationUnit >> povBiomassForager [
-	
-	<pov>
-	^ self biomass < ECECForager catabolicRate
-		ifTrue: [ CMPointOfView color: Color white ]
-		ifFalse: [ self povBiomass ]
-]
-
-{ #category : 'pov' }
-ECECVegetationUnit >> povForagersVision [
-
-	<pov>
-	(self hasOccupantsOfClass: ECECForager)
-		ifTrue: [ ^ self povBiomassForager ].
-	
-	(self neighbourhood anySatisfy: [ :each | each hasOccupantsOfClass: ECECForager ])
-		ifTrue: [ ^ self povBiomassForager ].
-	
-	^ CMPointOfView color: Color black
 ]
 
 { #category : 'stepping' }

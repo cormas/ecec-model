@@ -11,24 +11,22 @@ ECECRestrainedForager class >> harvestRate [
 	^ harvestRate
 ]
 
-{ #category : 'pov' }
-ECECRestrainedForager >> pov [
+{ #category : 'aspects' }
+ECECRestrainedForager >> aspectDefault: look [
 
-	<pov>
-	^ super pov
-		color: Color blue;
-		yourself
+	<aspect>
+	super aspectDefault: look.
+	look color: Color blue
 ]
 
-{ #category : 'pov' }
-ECECRestrainedForager >> povEnergy [
+{ #category : 'aspects' }
+ECECRestrainedForager >> aspectEnergy: look [
 
-	<pov>
-	^ super pov 
-		color: (self
-		  colorAttribute: #energy
-		  min: 0
-		  max: 180
-		  color: Color blue);
-		yourself 
+	<aspect>
+	super aspectDefault: look.
+	look
+		colorShadeOf: Color blue
+		forValue: energy
+		from: 0
+		to: 180
 ]

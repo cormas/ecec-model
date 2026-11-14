@@ -62,6 +62,13 @@ ECECForager class >> initialEnergy: aNumber [
 	initialEnergy := aNumber
 ]
 
+{ #category : 'aspects' }
+ECECForager >> aspectDefault: look [
+
+	<aspect>
+	look size: self displayedSize
+]
+
 { #category : 'biology' }
 ECECForager >> consumeEnergy [
 	<action>
@@ -72,6 +79,13 @@ ECECForager >> consumeEnergy [
 ECECForager >> cowPovClass [
 
 	self subclassResponsibility
+]
+
+{ #category : 'aspects' }
+ECECForager >> displayedSize [
+	"Answer the size of the forager in a view, as a fraction of a cell: the more energy, the bigger"
+
+	^ 0.1 + (self energy / self class fertilityThreshold)
 ]
 
 { #category : 'biology' }
@@ -137,13 +151,6 @@ ECECForager >> move [
 	self moveTo: targetPatch.
 ]
 
-{ #category : 'pov' }
-ECECForager >> pov [
-
-	<pov>
-	^ CMPointOfView size: self sizeOfPOV
-]
-
 { #category : 'biology' }
 ECECForager >> reproduce [
 	"The forager reproduces asexually, creating an offspring with the same heritable traits as itself (e.g., feeding strategy). At the same time the parent's energy is reduced by the offspring's initial energy (50).  Newborn offspring occupies the nearest free place to its parent. "
@@ -159,12 +166,6 @@ ECECForager >> reproduce [
 	self energy: self energy - newForager energy.
 	
 	newForager moveTo: freePatch
-]
-
-{ #category : 'povSize' }
-ECECForager >> sizeOfPOV [
-
-	^ 0.1 + (self energy / self class fertilityThreshold)
 ]
 
 { #category : 'stepping' }

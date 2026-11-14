@@ -167,22 +167,6 @@ ECECForagerTest >> testNoReproductionWithLowEnergy [
 	
 ]
 
-{ #category : 'tests' }
-ECECForagerTest >> testPov [
-
-	self assert: restrainedForager pov color isColor.
-	self assert: unrestrainedForager pov color isColor.
-	self deny: restrainedForager pov equals: unrestrainedForager pov.
-]
-
-{ #category : 'tests' }
-ECECForagerTest >> testPovEnergyClass [
-
-	| pov |
-	pov := restrainedForager povEnergy. 
-	self assert: pov class equals: CMPointOfView. 
-]
-
 { #category : 'tests - reproduction' }
 ECECForagerTest >> testReproduce [
 

@@ -59,18 +59,18 @@ ECECModel >> allForagers [
 
 { #category : 'init' }
 ECECModel >> homogeneousEnvironment [
+
 	<init>
 	self
 		createGridNumberOfRows: numberOfRows
 		numberOfColumns: numberOfColumns
 		neighbourhood: 4
 		closed: true.
-		
-	(self @@ ECECVegetationUnit) do: [ :each | each initializeWithRandomBiomass ].
-	
-	self initializeAgents.
-	
-	ECECVegetationUnit activePovSelector: #povBiomass
+
+	self @@ ECECVegetationUnit do: [ :each |
+		each initializeWithRandomBiomass ].
+
+	self initializeAgents
 ]
 
 { #category : 'parameters' }
@@ -188,20 +188,14 @@ ECECModel >> smallEnvironment [
 		numberOfColumns: 4
 		neighbourhood: 8
 		closed: false.
-
 	self @@ ECECVegetationUnit do: [ :each |
 		each initializeWithRandomBiomass ].
-
 	self
 		create: 1
 		randomlyLocatedAloneEntitiesOfClass: ECECRestrainedForager.
-
 	self
 		create: 1
-		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager.
-
-	ECECVegetationUnit activePovSelector: #povBiomass.
-	ECECForager activePovSelector: #pov
+		randomlyLocatedAloneEntitiesOfClass: ECECUnrestrainedForager
 ]
 
 { #category : 'control' }
