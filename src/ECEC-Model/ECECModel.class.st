@@ -57,6 +57,59 @@ ECECModel >> allForagers [
 	^ all
 ]
 
+{ #category : 'charts' }
+ECECModel >> chartBiomass [
+	"How much biomass is left for the foragers?"
+
+	<chart>
+	^ CMChart new
+		  title: 'Biomass';
+		  yTitle: 'Total biomass';
+		  add: (CMLineSeries new x: #currentTimeStep y: #totalAmountOfBiomass;
+				   label: 'Total amount of biomass';
+				   color: (Color fromHexString: '00B44C');
+				   yourself);
+		  yourself
+]
+
+{ #category : 'charts' }
+ECECModel >> chartEnergy [
+	"How much energy does each kind of forager hold?"
+
+	<chart>
+	^ CMChart new
+		  title: 'Energy of the foragers';
+		  yTitle: 'Total energy';
+		  add: (CMLineSeries new x: #currentTimeStep y: #totalEnergyOfRestrained;
+				   label: 'Restrained foragers';
+				   color: Color blue;
+				   yourself);
+		  add: (CMLineSeries new x: #currentTimeStep y: #totalEnergyOfUnrestrained;
+				   label: 'Unrestrained foragers';
+				   color: Color red;
+				   yourself);
+		  yourself
+]
+
+{ #category : 'charts' }
+ECECModel >> chartForagers [
+	"Which kind of forager survives: the restrained or the unrestrained?"
+
+	<chart>
+	^ CMChart new
+		  title: 'Foragers';
+		  yTitle: 'Number of foragers';
+		  add: (CMLineSeries new x: #currentTimeStep y: #numberOfRestrainedForagers;
+				   label: 'Restrained foragers';
+				   color: Color blue;
+				   yourself);
+		  add: (CMLineSeries new x: #currentTimeStep y: #numberOfUnrestrainedForagers;
+				   label: 'Unrestrained foragers';
+				   color: Color red;
+				   yourself);
+		  yourself
+]
+
 { #category : 'init' }
 ECECModel >> homogeneousEnvironment [
 
@@ -143,7 +196,7 @@ ECECModel >> numberOfColumns: anObject [
 { #category : 'probes' }
 ECECModel >> numberOfRestrainedForagers [
 
-	<probeNamed: 'Number of restrained foragers' color: '0000FF'>
+	<probe>
 	^ (self @@ ECECRestrainedForager) size
 ]
 
@@ -162,7 +215,7 @@ ECECModel >> numberOfRows: anObject [
 { #category : 'probes' }
 ECECModel >> numberOfUnrestrainedForagers [
 
-	<probeNamed: 'Number of unrestrained foragers' color: 'FF0000'>
+	<probe>
 	^ (self @@ ECECUnrestrainedForager) size
 ]
 
@@ -208,20 +261,20 @@ ECECModel >> step [
 { #category : 'probes' }
 ECECModel >> totalAmountOfBiomass [
 
-	<probeNamed: 'Total amount of biomass' color: '00b44c'>
+	<probe>
 	^ (self @@ ECECVegetationUnit) sum: [ :each | each biomass ]
 ]
 
 { #category : 'probes' }
 ECECModel >> totalEnergyOfRestrained [
 
-	<probeNamed: 'Total energy of restrained foragers' color: 'CCFFFF'>
+	<probe>
 	^ (self @@ ECECRestrainedForager) sum: [ :each | each energy ]
 ]
 
 { #category : 'probes' }
 ECECModel >> totalEnergyOfUnrestrained [
 
-	<probeNamed: 'Total energy of unestrained foragers' color: 'FF00FF'>
+	<probe>
 	^ (self @@ ECECUnrestrainedForager) sum: [ :each | each energy ]
 ]
