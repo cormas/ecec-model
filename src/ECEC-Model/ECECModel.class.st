@@ -1,6 +1,6 @@
 Class {
 	#name : 'ECECModel',
-	#superclass : 'CMAbstractModel',
+	#superclass : 'CMModel',
 	#instVars : [
 		'numberOfRows',
 		'numberOfColumns',
